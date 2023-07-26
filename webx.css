@@ -526,7 +526,6 @@ span.fr-img-caption.fr-view.fr-dii.fr-fir {
 }
 
 /*end-commonstyles library*/
-@charset "UTF-8";
 
 .u-hidden-block {
   visibility: hidden !important;
@@ -30888,10 +30887,10 @@ a.u-button-style.u-border-20 {
 }
 
 /*begin-variables font-family*/
-.u-body {
+/* .u-body {
   font-family: 'Open Sans', sans-serif;
-}
-
+} */
+/* 
 h1,
 h2,
 h3,
@@ -30899,7 +30898,7 @@ h4,
 h5,
 h6 {
   font-family: Roboto, sans-serif;
-}
+} */
 
 /*end-variables font-family*/
 /*begin-variables color*/
@@ -30923,7 +30922,7 @@ h6 {
 /*end-variables color*/
 /*begin-variables font*/
 .u-custom-font.u-text-font {
-  font-family: 'Open Sans', sans-serif !important;
+  font-family: Roboto, sans-serif;
 }
 
 .u-custom-font.u-heading-font {
@@ -33989,7 +33988,7 @@ section.u-palette-1-base:before,
 .u-container-layout.u-container-layout.u-palette-1-base:before,
 .u-table-alt-palette-1-base tr:nth-child(even) {
   color: #ffffff;
-  background-color: #478ac9;
+  background-color: #000000;
 }
 
 .u-input.u-palette-1-base,
@@ -49464,6 +49463,9 @@ blockquote {
 
 .u-footer {
   background-image: none;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
 
 .u-footer .u-sheet-1 {
