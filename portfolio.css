@@ -95,6 +95,10 @@
      grid-gap: 12px 12px;
      grid-template-columns: auto;
    }
+
+   .xfooter {
+     position: relative;
+   }
  }
 
  @media (max-width: 575px) {
