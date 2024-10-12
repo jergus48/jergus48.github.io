@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu with Icons and Links</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .menu {
+            position: absolute;
+            background-color: #fff;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, .2);
+            border-radius: 10px;
+            padding: 10px 0;
+            top: 48px;
+            margin: 0;
+            z-index: 1;
+        }
+        .menu li {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            font-size: 14px;
+            border-bottom: 1px solid #eee;
+        }
+        .menu li:last-child {
+            border: none;
+        }
+        .menu li i {
+            margin-right: 10px;
+        }
+        .menu li a {
+            text-decoration: none;
+            color: #333;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .menu li:hover {
+            cursor: pointer;
+            background-color: #f9f9f9;
+        }
+        .menu li a:hover {
+            color: #007BFF; /* Optional: Add color change on hover */
+        }
+    </style>
+</head>
+<body>
+
+<ul class="menu">
+    <li><a href="/order-history"><i class="fas fa-history"></i> História objednávok</a></li>
+    <li><a href="/lists"><i class="fas fa-heart"></i> Zoznamy</a></li>
+    <li><a href="/settings"><i class="fas fa-cog"></i> Nastavenia</a></li>
+    <li><a href="/account"><i class="fas fa-user"></i> Účet</a></li>
+    <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Odhlásiť sa</a></li>
+</ul>
+
+</body>
+</html>

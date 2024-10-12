@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Menu</title>
+    <style>
+        /* Hide subcategories initially */
+        .subcategory-list {
+            display: none;
+            padding-left: 20px;
+        }
+
+        /* Rotating arrow when active */
+        .category-item.active .arrow {
+            transform: rotate(90deg); /* Rotate arrow to point down */
+            transition: transform 0.3s ease;
+        }
+
+        /* Showing the subcategory list */
+        .category-item.active .subcategory-list {
+            display: block;
+        }
+
+        /* Optionally style the arrow */
+        .arrow {
+            margin-left: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<ul class="category-list">
+    <li class="category-item">
+        <a href="#" class="category-title">
+            Darčeky Fridolin
+            <span class="arrow">&#9654;</span> <!-- Default right arrow -->
+        </a>
+    </li>
+    <li class="category-item">
+        <a href="#" class="category-title">
+            Hlavná kategória
+            <span class="arrow">&#9654;</span> <!-- Default right arrow -->
+        </a>
+        <ul class="subcategory-list">
+            <li><a href="#">Podkategória</a></li>
+            <li><a href="#">Podkategória</a></li>
+            <li><a href="#">Podkategória</a></li>
+            <li><a href="#">Podkategória</a></li>
+        </ul>
+    </li>
+    <li class="category-item">
+        <a href="#" class="category-title">
+            Hlavná kategória
+            <span class="arrow">&#9654;</span> <!-- Default right arrow -->
+        </a>
+    </li>
+</ul>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.category-title').on('click', function (e) {
+            e.preventDefault(); // Prevent link behavior
+    
+            // Toggle the 'active' class on the parent .category-item to show/hide submenu
+            $(this).parent('.category-item').toggleClass('active');
+        });
+    });
+    
+    
+    </script>
