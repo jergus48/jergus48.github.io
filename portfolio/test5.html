@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Atom Model - Accurate Match</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle, #0d0f1a, #050509);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .atom-wrapper {
+      position: relative;
+      width: 500px;
+      height: 500px;
+    }
+
+    .atom-sphere {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      /* background: radial-gradient(circle at center, #1b0044, #3500a0); */
+      box-shadow: 0 0 70px #7c00ff88, inset 0 0 80px #b466ff44;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .core {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, #ffcc88, #ff3333);
+      box-shadow: 0 0 20px #ff7744;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      animation: pulse 3s infinite;
+      z-index: 10;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .orbit-path {
+      position: absolute;
+      border: 2px solid rgba(0, 255, 200, 0.3);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      box-shadow:
+        0 0 10px rgba(0, 255, 200, 0.2),
+        0 0 20px rgba(0, 255, 200, 0.1),
+        inset 0 0 8px rgba(0, 255, 200, 0.08);
+      background: radial-gradient(ellipse at center, transparent 60%, rgba(0,255,200,0.03) 100%);
+      z-index: 2;
+    }
+
+    .orbit1 { width: 400px; height: 100px; transform: translate(-50%, -50%) rotate(0deg); }
+    .orbit2 { width: 400px; height: 100px; transform: translate(-50%, -50%) rotate(60deg); }
+    .orbit3 { width: 400px; height: 100px; transform: translate(-50%, -50%) rotate(-60deg); }
+
+    .electron {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: cyan;
+      box-shadow: 0 0 6px cyan;
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+
+<div class="atom-wrapper">
+  <div class="atom-sphere">
+    <div class="core" id="percentText">78%</div>
+  </div>
+
+  <!-- Orbit lines -->
+  <div class="orbit-path orbit1"></div>
+  <div class="orbit-path orbit2"></div>
+  <div class="orbit-path orbit3"></div>
+
+  <!-- Electrons -->
+  <div class="electron" id="e1"></div>
+  <div class="electron" id="e2"></div>
+  <div class="electron" id="e3"></div>
+</div>
+
+<script>
+  const SPEED = 0.2;
+
+  function updateProgress(percent) {
+    document.getElementById('percentText').textContent = `${Math.max(0, Math.min(100, percent))}%`;
+  }
+
+  updateProgress(78);
+
+  const electron1 = document.getElementById("e1");
+  const electron2 = document.getElementById("e2");
+  const electron3 = document.getElementById("e3");
+
+  let angle = 0;
+
+  function animate() {
+    angle += SPEED;
+
+    const cx = 250;
+    const cy = 250;
+
+    let x1 = cx + 200 * Math.cos(angle);
+    let y1 = cy + 50 * Math.sin(angle);
+    electron1.style.left = `${x1 - 7}px`;
+    electron1.style.top = `${y1 - 7}px`;
+
+    let x2 = cx + 200 * Math.cos(angle + 2);
+    let y2 = cy + 50 * Math.sin(angle + 2);
+    let r2 = rotatePoint(x2, y2, cx, cy, 60);
+    electron2.style.left = `${r2.x - 7}px`;
+    electron2.style.top = `${r2.y - 7}px`;
+
+    let x3 = cx + 200 * Math.cos(angle + 4);
+    let y3 = cy + 50 * Math.sin(angle + 4);
+    let r3 = rotatePoint(x3, y3, cx, cy, -60);
+    electron3.style.left = `${r3.x - 7}px`;
+    electron3.style.top = `${r3.y - 7}px`;
+
+    requestAnimationFrame(animate);
+  }
+
+  function rotatePoint(x, y, cx, cy, angleDeg) {
+    const rad = (angleDeg * Math.PI) / 180;
+    const dx = x - cx;
+    const dy = y - cy;
+    return {
+      x: cx + dx * Math.cos(rad) - dy * Math.sin(rad),
+      y: cy + dx * Math.sin(rad) + dy * Math.cos(rad),
+    };
+  }
+
+  animate();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Electric Progress Core</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle at center, #0d0f1a, #050509);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .core-container {
+      position: relative;
+      width: 260px;
+      height: 260px;
+    }
+
+    .core-ring {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, #1b0044, #3500a0);
+      box-shadow: 0 0 40px #7c00ff88, inset 0 0 50px #b466ff44;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: glowPulse 4s infinite ease-in-out;
+      position: relative;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% {
+        box-shadow: 0 0 30px #7c00ff88, inset 0 0 40px #b466ff44;
+      }
+      50% {
+        box-shadow: 0 0 80px #9f00ffcc, inset 0 0 70px #e08bff55;
+      }
+    }
+
+    .core-center {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, #ffffffcc, #b466ff44);
+      box-shadow: 0 0 20px #ffffff55;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: white;
+      animation: pulse 3s infinite;
+      z-index: 2;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.08);
+      }
+    }
+
+    .indicator {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #00f5ff;
+      box-shadow: 0 0 10px #00f5ff;
+      z-index: 2;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+<div class="core-container">
+  <div class="core-ring" id="ring">
+    <div class="core-center" id="percentText">0%</div>
+    <div class="indicator" id="indicator"></div>
+    <canvas id="lightningCanvas" width="260" height="260"></canvas>
+  </div>
+</div>
+<script>
+  const centerX = 130;
+  const centerY = 130;
+  const outerRadius = 110;
+  const coreRadius = 45;
+
+  const BOLT_COUNT = 10; // počet bleskov
+  const INTERVAL = 50; // interval v ms
+
+  function updateProgress(percent) {
+    const clamped = Math.max(0, Math.min(100, percent));
+    const angle = (clamped / 100) * 2 * Math.PI - Math.PI / 2;
+
+    const indicator = document.getElementById('indicator');
+    const percentText = document.getElementById('percentText');
+    percentText.textContent = `${clamped}%`;
+
+    const x = centerX + outerRadius * Math.cos(angle) - 6;
+    const y = centerY + outerRadius * Math.sin(angle) - 6;
+    indicator.style.left = `${x}px`;
+    indicator.style.top = `${y}px`;
+  }
+
+  function drawLightning(ctx, fromX, fromY, toX, toY, segments = 12) {
+    ctx.beginPath();
+    ctx.moveTo(fromX, fromY);
+    for (let i = 1; i < segments; i++) {
+      const t = i / segments;
+      const dx = fromX + (toX - fromX) * t + (Math.random() - 0.5) * 10;
+      const dy = fromY + (toY - fromY) * t + (Math.random() - 0.5) * 10;
+      ctx.lineTo(dx, dy);
+    }
+    ctx.lineTo(toX, toY);
+    ctx.strokeStyle = `rgba(0, 255, 255, ${0.5 + Math.random() * 0.4})`;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  }
+
+  function startLightning() {
+    const canvas = document.getElementById('lightningCanvas');
+    const ctx = canvas.getContext('2d');
+
+    setInterval(() => {
+      ctx.clearRect(0, 0, 260, 260);
+
+      for (let i = 0; i < BOLT_COUNT; i++) {
+        const angle = Math.random() * 2 * Math.PI;
+
+        // Z jadra (core radius)
+        const fromX = centerX + coreRadius * Math.cos(angle);
+        const fromY = centerY + coreRadius * Math.sin(angle);
+
+        // Do kraja (presne po obvode vonkajšieho kruhu)
+        const toX = centerX + outerRadius * Math.cos(angle);
+        const toY = centerY + outerRadius * Math.sin(angle);
+
+        drawLightning(ctx, fromX, fromY, toX, toY);
+      }
+    }, INTERVAL);
+  }
+
+  updateProgress(78); // nastav % tu
+  startLightning();
+</script>
