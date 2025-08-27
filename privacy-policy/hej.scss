@@ -192,6 +192,9 @@ h1 {
 }
 
 .privacy-card {
+      margin-left: auto;
+    max-width: 620px;
+    margin-right: auto;
   background: rgba(28, 28, 30, 0.6);
   backdrop-filter: blur(20px);
   border-radius: var(--border-radius);
