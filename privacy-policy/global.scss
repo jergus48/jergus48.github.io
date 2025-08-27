@@ -1,0 +1,1487 @@
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+// Use the same dark mode approach as your working app
+@import '@ionic/angular/css/palettes/dark.system.css';
+
+
+// Import theme files
+@import 'app/themes/default.theme.scss';
+@import 'app/themes/galaxy.theme.scss';
+@import 'app/themes/earth.theme.scss';
+@import 'app/themes/moon.theme.scss';
+@import 'app/themes/nebula.theme.scss';
+@import 'app/themes/saturn.theme.scss';
+@import 'app/themes/black-hole.theme.scss';
+@import 'app/themes/ufo.theme.scss';
+
+* {
+  font-family: var(--ion-font-family);
+}
+
+:root {
+  --ion-color-orange: #ff9500;
+  --ion-color-orange-rgb: 255, 149, 0;
+  --ion-color-orange-contrast: #000000;
+  --ion-color-orange-contrast-rgb: 0, 0, 0;
+  --ion-color-orange-shade: #e08300;
+  --ion-color-orange-tint: #ffa01a;
+
+  --ion-safe-area-top: env(safe-area-inset-top, 0px);
+  --ion-safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --ion-safe-area-left: env(safe-area-inset-left, 0px);
+  --ion-safe-area-right: env(safe-area-inset-right, 0px);
+
+  // --bg: #0a0b0f; //zmenene 4.8.2025
+  --bg: #04040499;
+  /* Main background - darker, more neutral */
+  --surface: #16171c;
+  /* Cards and containers */
+  --surface-alt: #1e1f25;
+  /* Slight variation for subtle contrast */
+  --accent: #4169e1;
+  /* Royal blue accent color */
+  --accent-hover: #5277e8;
+  /* Lighter accent for hover/focus */
+  --accent-glow: #4169e133;
+  /* Soft glow for progress bars */
+  --text: #ffffff;
+  /* High contrast text */
+  --text-secondary: #a0a3b1;
+  /* Desaturated for subtitles, metadata */
+  --text-muted: #6b6d7c;
+  /* Hints, timestamps, soft elements */
+  --border: #26272e;
+  /* Card and element borders */
+  --success: #32d690;
+  /* Completed or positive status */
+  --warning: #facc15;
+  /* Time-sensitive tasks, alerts */
+  --error: #ef4444;
+  /* Incomplete/failed task indicators */
+  --quest-card-bg: rgba(30, 31, 37, 0.5);
+  /* Semi-transparent quest cards */
+  --progress-bg: rgba(65, 105, 225, 0.1);
+  /* Progress bar background */
+
+  --heading-large: 24px;
+  --heading-small: 18px;
+  --text-large: 16px;
+  --text-small: 14px;
+  --text-tiny: 12px;
+
+  --rating-alert-bg: var(--surface);
+  --rating-alert-border: var(--border);
+  --rating-alert-text: var(--text);
+  --rating-alert-button-bg: var(--accent);
+  --rating-alert-button-text: var(--text);
+
+  .ion-color-orange {
+    --ion-color-base: var(--ion-color-orange);
+    --ion-color-base-rgb: var(--ion-color-orange-rgb);
+    --ion-color-contrast: var(--ion-color-orange-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-orange-contrast-rgb);
+    --ion-color-shade: var(--ion-color-orange-shade);
+    --ion-color-tint: var(--ion-color-orange-tint);
+  }
+}
+
+.app-rating-alert {
+  --background: var(--rating-alert-bg);
+  --border-color: var(--rating-alert-border);
+  --border-radius: 16px;
+  --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+
+  .alert-head {
+    padding-top: 24px;
+
+    .alert-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--rating-alert-text);
+    }
+  }
+
+  .alert-message {
+    color: var(--text-secondary);
+    font-size: 16px;
+    padding: 0 16px 16px;
+  }
+
+  .alert-button-group {
+    padding: 16px;
+
+    .alert-button {
+      border-radius: 0;
+
+      &.alert-button-confirm {
+        --background: var(--rating-alert-button-bg);
+        --color: var(--rating-alert-button-text);
+        font-weight: 600;
+      }
+
+      &.alert-button-cancel {
+        --color: var(--text-secondary);
+      }
+    }
+  }
+}
+
+
+ion-toolbar {
+  --background: transparent;
+  --border-width: 0;
+  --border-style: none;
+  border: none !important;
+}
+
+ion-header,
+ion-footer {
+  --background: transparent;
+  --border-width: 0;
+  --border-style: none;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
+.small-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+  min-height: 220px;
+  box-sizing: border-box;
+  text-align: center;
+  margin: 0;
+  padding: 16px;
+  min-height: 180px;
+  transition: all 0.3s ease;
+
+  & ion-icon,
+  & .quest-icon {
+    margin: 0 auto;
+    color: var(--accent);
+    font-size: 32px;
+  }
+
+  h2 {
+    margin: 0px;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  &.selected {
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 20px rgba(65, 105, 225, 0.3);
+    background: linear-gradient(135deg, rgba(65, 105, 225, 0.1), rgba(82, 119, 232, 0.05));
+  }
+}
+
+.blue-title {
+  color: var(--accent) !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+}
+
+ion-content {
+  position: relative;
+}
+
+ion-card,
+.card-container {
+  background: var(--quest-card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+ion-item {
+  --background: transparent;
+  --border-width: 0 !important;
+  --inner-border-width: 0 !important;
+  --border-style: none !important;
+}
+
+// Ensure ion-card takes full width of its ion-item container
+ion-item,
+ion-card {
+  // width: 100% !important;
+  // max-width: 100% !important;
+  // min-width: 100% !important;
+  margin: 0;
+  box-sizing: border-box !important;
+}
+
+/* Progress bar styling */
+.progress-bar {
+  background: var(--progress-bg);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-bar .fill {
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.quest-icon {
+  color: var(--accent);
+  filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+.heading-large {
+  font-size: var(--heading-large);
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.heading-small {
+  font-size: var(--heading-small);
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.text-large {
+  font-size: var(--text-large);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.text-small {
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  line-height: 1.3;
+}
+
+.text-tiny {
+  font-size: var(--text-tiny);
+  color: var(--text-muted);
+  line-height: 1.2;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text);
+  font-weight: 600;
+  margin: 0;
+}
+
+p,
+span {
+  color: var(--text-secondary);
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+
+
+//global settings//
+
+//buttons
+
+ion-button {
+  margin: 0;
+  width: 100%;
+}
+
+.link-button {
+  display: flex;
+  width: auto;
+  --background: transparent;
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.blue-button {
+  margin: 0;
+  --background: var(--accent);
+  --color: var(--text);
+  font-weight: 600;
+  font-size: 15px;
+  width: 100%;
+  height: 50px;
+}
+
+.social-button {
+  width: 100%;
+  flex: 1;
+  --background: var(--surface);
+  --color: var(--text);
+  --border-color: var(--border);
+  --border-style: solid;
+  --border-width: 1px;
+  width: 100%;
+  height: 50px;
+
+  .button-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    ion-icon {
+      font-size: 18px;
+      margin-right: 8px;
+    }
+
+    span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+  }
+}
+
+//inputs//
+
+.dark-input {
+  --background: var(--surface);
+  --color: var(--text);
+  --placeholder-color: var(--text-secondary);
+  --border-color: var(--border);
+  --border-style: solid;
+  --border-radius: 8px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  --border-width: 1px;
+  --font-size: 16px;
+  --height: 40px;
+}
+
+ion-input.custom.ios .input-bottom .helper-text,
+ion-input.custom.ios .input-bottom .counter,
+ion-input.custom.md .input-bottom .helper-text,
+ion-input.custom.md .input-bottom .counter {
+  color: var(--text);
+}
+
+form {
+  width: 100%;
+}
+
+//texts//
+
+.upshift-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+
+.gradient-text {
+  font-weight: bold;
+  background: linear-gradient(270deg,
+      var(--accent),
+      var(--text),
+      var(--accent));
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 3s ease-in-out infinite alternate;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 100% 0%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.dark-text {
+  color: var(--text-secondary);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.smaller-dark-text {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+//sun background//
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+
+  .gradient-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+  }
+
+  .celestial-body {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    filter: blur(25px);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+    animation: celestial-cycle 30s linear infinite;
+    opacity: 0.5;
+    box-shadow: 0 0 60px rgba(255, 255, 255, 0.1);
+  }
+
+  @keyframes celestial-cycle {
+    0% {
+      transform: translate(-250px, 200%);
+      background: radial-gradient(circle, rgba(255, 190, 69, 0.4) 0%, rgba(255, 190, 69, 0) 70%);
+      box-shadow: 0 0 80px rgba(255, 165, 0, 0.2);
+    }
+
+    25% {
+      transform: translate(0, 300px);
+      background: radial-gradient(circle, rgba(233, 212, 162, 0.4) 0%, rgba(233, 212, 162, 0) 70%);
+      box-shadow: 0 0 80px rgba(214, 190, 115, 0.2);
+    }
+
+    50% {
+      transform: translate(160%, 100px);
+      background: radial-gradient(circle, rgba(210, 235, 255, 0.4) 0%, rgba(210, 235, 255, 0) 70%);
+      box-shadow: 0 0 80px rgba(173, 216, 230, 0.2);
+    }
+
+    75% {
+      transform: translate(0, 80%);
+      background: radial-gradient(circle, rgba(233, 212, 162, 0.4) 0%, rgba(233, 212, 162, 0) 70%);
+      box-shadow: 0 0 80px rgba(214, 190, 115, 0.2);
+    }
+
+    100% {
+      transform: translate(-250px, 160%);
+      background: radial-gradient(circle, rgba(255, 190, 69, 0.4) 0%, rgba(255, 190, 69, 0) 70%);
+      box-shadow: 0 0 80px rgba(255, 165, 0, 0.2);
+    }
+  }
+
+}
+
+//accessories//
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+
+  &:before,
+  &:after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    opacity: 0.7;
+  }
+
+  span {
+    padding: 0 16px;
+  }
+}
+
+// Hide default select icons globally
+ion-select {
+  &::part(icon) {
+    display: none !important;
+  }
+
+  // Alternative method if ::part doesn't work
+  .select-icon {
+    display: none !important;
+  }
+}
+
+// Quest card styling
+.small-card {
+  .quest-details {
+    margin-top: auto;
+  }
+
+  .goal-info {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--accent);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  ion-text {
+    font-size: 14px;
+    line-height: 1.3;
+    margin: 8px 0;
+  }
+}
+
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.liquid-glass-card {
+  text-align: center;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 16px !important;
+  transition: all 0.3s ease !important;
+  --background: transparent !important;
+}
+
+.liquid-glass-card-secondary {
+  text-align: center;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+  --background: transparent !important;
+}
+
+// Quest sliding item container
+.quest-sliding-item {
+  border-radius: 16px;
+  overflow: hidden;
+  --background: transparent !important;
+  display: block !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  // Make sure the ion-item has the same height as quest-item
+  ion-item {
+    --min-height: auto;
+    min-height: auto;
+    margin-bottom: 20px !important;
+  }
+
+  // When sliding item is open, center the options vertically
+  &.item-sliding-active-slide {
+    ion-item-options {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      height: 100% !important;
+    }
+  }
+
+  // Sliding options styling - Liquid Glass Theme
+  ion-item-options {
+    background: transparent;
+    padding: 8px;
+    border: none !important;
+    box-shadow: none !important;
+
+    ion-item-option {
+      // Base liquid glass styling
+      background: linear-gradient(135deg,
+          rgba(255, 255, 255, 0.12) 0%,
+          rgba(255, 255, 255, 0.08) 50%,
+          rgba(255, 255, 255, 0.04) 100%);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: none;
+      border-radius: 12px;
+      --color: white;
+      font-weight: 500;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      margin: 0 4px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      // Shimmer effect
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.15),
+            transparent);
+        transition: left 0.6s ease;
+        pointer-events: none;
+      }
+
+      &:hover::before {
+        left: 100%;
+      }
+
+      // Primary (Edit) button - Blue liquid glass
+      &[color="primary"] {
+        background: linear-gradient(135deg,
+            rgba(65, 105, 225, 0.25) 0%,
+            rgba(65, 105, 225, 0.15) 50%,
+            rgba(65, 105, 225, 0.08) 100%);
+        border-color: rgba(65, 105, 225, 0.3);
+
+        &:hover {
+          background: linear-gradient(135deg,
+              rgba(65, 105, 225, 0.35) 0%,
+              rgba(65, 105, 225, 0.25) 50%,
+              rgba(65, 105, 225, 0.15) 100%);
+          border-color: rgba(65, 105, 225, 0.5);
+          transform: translateX(-2px);
+        }
+      }
+
+      // Danger (Delete) button - Red liquid glass
+      &[color="danger"] {
+        background: linear-gradient(135deg,
+            rgba(239, 68, 68, 0.25) 0%,
+            rgba(239, 68, 68, 0.15) 50%,
+            rgba(239, 68, 68, 0.08) 100%);
+        border-color: rgba(239, 68, 68, 0.3);
+
+        &:hover {
+          background: linear-gradient(135deg,
+              rgba(239, 68, 68, 0.35) 0%,
+              rgba(239, 68, 68, 0.25) 50%,
+              rgba(239, 68, 68, 0.15) 100%);
+          border-color: rgba(239, 68, 68, 0.5);
+          transform: translateX(-2px);
+        }
+      }
+
+      ion-icon {
+        margin-bottom: 4px;
+        font-size: 20px;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+      }
+    }
+  }
+}
+
+.quest-item {
+  --ion-item-background: transparent;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.04) 100%);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 16px;
+  padding: 12px 16px;
+  margin: 0 0 6px 0;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    0 2px 8px rgba(0, 0, 0, 0.15);
+
+  // Shimmer Effect Overlay
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.15),
+        transparent);
+    transition: left 0.6s ease;
+    pointer-events: none;
+  }
+
+  // Hover Effects - only shimmer, no movement
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.18) 0%,
+        rgba(255, 255, 255, 0.12) 50%,
+        rgba(255, 255, 255, 0.08) 100%);
+    // box-shadow:
+    //   0 8px 32px rgba(0, 0, 0, 0.25),
+    //   0 2px 8px rgba(0, 0, 0, 0.15),
+    //   inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    //   inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  // Active/Touch State - only shimmer, no movement
+  &:active {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.1) 100%);
+    transition: all 0.15s ease;
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  // Completed State
+  &.completed {
+    border-color: rgba(65, 105, 225, 0.4);
+    background: linear-gradient(135deg,
+        rgba(65, 105, 225, 0.15) 0%,
+        rgba(65, 105, 225, 0.08) 50%,
+        rgba(255, 255, 255, 0.06) 100%);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 50% 50%,
+          rgba(65, 105, 225, 0.1) 0%,
+          transparent 70%);
+      pointer-events: none;
+    }
+  }
+
+  &.selected {
+    transform: translateY(-2px);
+    border-color: rgba(65, 105, 225, 0.6);
+    background: linear-gradient(135deg,
+        rgba(65, 105, 225, 0.2) 0%,
+        rgba(65, 105, 225, 0.12) 50%,
+        rgba(255, 255, 255, 0.08) 100%);
+    box-shadow:
+      0 12px 40px rgba(65, 105, 225, 0.3),
+      0 6px 20px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  // Main Content Row
+  .quest-row,
+  ion-row {
+    width: 100%;
+    align-items: center;
+    margin: 0;
+
+    ion-col:first-child {
+      flex: 0 0 auto;
+      width: auto;
+      max-width: none;
+      padding: 0 16px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .quest-icon {
+        font-size: 1.8rem;
+        line-height: 1;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        transition: all 0.3s ease;
+
+        // Hover animation for icon
+        &:hover {
+          transform: scale(1.1) rotate(5deg);
+          filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+        }
+      }
+    }
+
+    .quest-info {
+      flex: 1;
+      padding: 0;
+      align-items: flex-start;
+      justify-content: center;
+
+      h3 {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text);
+        margin: 0 0 2px 0;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+        display: flex;
+      }
+
+      ion-text {
+        font-size: 12px;
+        color: var(--text-secondary);
+        line-height: 1.2;
+        margin: 0 0 4px 0;
+        opacity: 0.9;
+      }
+
+      .members-count {
+        font-size: 10px;
+        font-weight: 600;
+        line-height: 1;
+        margin-top: 3px;
+        white-space: nowrap;
+      }
+    }
+
+    .quest-streak {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      color: #FF6B35;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 8px;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+      transition: all 0.3s ease;
+    }
+  }
+
+  .quest-goal-info {
+    margin-top: 4px;
+
+    .goal-text {
+      font-size: 11px;
+      color: var(--text-secondary);
+      opacity: 0.7;
+      font-weight: 500;
+    }
+  }
+}
+
+/* ===== QUEST PROGRESS CONTAINER STYLES ===== */
+
+.quest-item .progress-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 4px;
+
+  .progress-time,
+  .progress {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .progress-text {
+    // Side positioning
+    flex-shrink: 0;
+    margin: 0;
+    // margin-left: 10px;
+
+    // Typography
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+
+    // Compact Liquid Glass Badge
+    background: linear-gradient(135deg,
+        rgba(65, 105, 225, 0.15) 0%,
+        rgba(82, 119, 232, 0.1) 50%,
+        rgba(102, 126, 234, 0.08) 100%);
+    backdrop-filter: blur(8px);
+    padding: 2px 4px;
+    border-radius: 4px;
+    border: 1px solid rgba(65, 105, 225, 0.2);
+    letter-spacing: 0.01em;
+
+    // Compact Shadow
+    box-shadow:
+      0 1px 4px rgba(65, 105, 225, 0.12),
+      0 1px 2px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    // Smooth Animation
+    transition: all 0.2s ease;
+
+    // Hover Effect
+    &:hover {
+      background: linear-gradient(135deg,
+          rgba(65, 105, 225, 0.18) 0%,
+          rgba(82, 119, 232, 0.12) 50%,
+          rgba(102, 126, 234, 0.1) 100%);
+      border-color: rgba(65, 105, 225, 0.25);
+      transform: translateY(-0.5px) scale(1.01);
+      box-shadow:
+        0 2px 6px rgba(65, 105, 225, 0.15),
+        0 1px 3px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  // Ensure ion-range takes remaining space
+  ion-range.progress-slider {
+    flex: 1;
+    min-width: 0;
+    margin-right: 8px;
+  }
+}
+
+/* ===== PREMIUM LIQUID GLASS ION-RANGE SLIDER ===== */
+ion-range.progress-slider {
+  // Base Structure
+  --bar-height: 4px;
+  --bar-border-radius: 2px;
+  --knob-size: 14px;
+
+  // Simple Blue Colors like in screenshot
+  --bar-background: rgba(255, 255, 255, 0.1);
+  --bar-background-active: #4169E1;
+
+  // Simple Blue Knob
+  --knob-background: #4169E1;
+  --knob-box-shadow: 0 2px 4px rgba(65, 105, 225, 0.3);
+
+  // Pin Styling
+  --pin-background: #4169E1;
+  --pin-color: #FFFFFF;
+
+  // Remove Ticks
+  --step: 1;
+  --tick-height: 0;
+  --tick-width: 0;
+  --tick-background: transparent;
+  --tick-background-active: transparent;
+
+  // Layout
+  margin: 0;
+  padding: 0;
+
+  // Simple Hover Effects
+  transition: all 0.2s ease;
+
+  &:hover {
+    --knob-size: 16px;
+    --knob-box-shadow: 0 3px 6px rgba(65, 105, 225, 0.4);
+  }
+}
+
+/* Hide tick marks completely */
+ion-range.progress-slider::part(tick) {
+  display: none !important;
+}
+
+ion-range.progress-slider::part(tick-active) {
+  display: none !important;
+}
+
+
+.liquid-glass-input {
+  transition: none;
+  height: 50px !important;
+  --background: rgba(255, 255, 255, 0.05);
+  --placeholder-color: var(--text-secondary);
+  --placeholder-text-align: start;
+  --color: var(--text);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-style: solid;
+  --border-width: 1px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --font-size: 16px;
+  --height: 50px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+// Liquid glass textarea - bez fixnej výšky
+.liquid-glass-textarea {
+  transition: none;
+  --background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.05);
+  --placeholder-color: var(--text-secondary);
+  --placeholder-text-align: start;
+  --color: #FFF;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-style: solid;
+  --border-width: 1px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  min-height: 80px !important;
+  height: auto !important;
+}
+
+ion-textarea.liquid-glass-textarea {
+  font-weight: 600;
+  overflow: visible !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+
+  .textarea-wrapper {
+    background: transparent !important;
+    background-color: transparent !important;
+    align-items: flex-start !important;
+    padding: 0;
+  }
+
+  .native-textarea {
+    padding: 0 !important;
+    background: transparent !important;
+    text-align: left !important;
+    vertical-align: top !important;
+  }
+}
+
+ion-input.liquid-glass-input,
+ion-textarea.liquid-glass-input,
+ion-select.liquid-glass-input {
+  text-transform: capitalize;
+
+  font-weight: 600;
+  overflow: visible !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+
+
+  // Force transparent background for textarea specifically
+  &.ion-textarea {
+    background: rgba(255, 255, 255, 0.05) !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+
+    .native-textarea {
+      background: transparent !important;
+      background-color: transparent !important;
+    }
+  }
+
+  &.ios {
+
+    .native-input,
+    .native-textarea,
+    .select-text {
+      border: none !important;
+      outline: none !important;
+    }
+  }
+
+  // Pre Material Design
+  &.md {
+
+    .native-input,
+    .native-textarea,
+    .select-text {
+      border: none !important;
+      outline: none !important;
+    }
+  }
+}
+
+.liquid-glass-input .native-input,
+.liquid-glass-input .select-text,
+.liquid-glass-input .select-placeholder,
+.liquid-glass-input .input-wrapper,
+.liquid-glass-input .select-wrapper,
+.liquid-glass-input .select-icon,
+.liquid-glass-input input,
+.liquid-glass-input select {
+  background: transparent !important;
+  text-align: left;
+}
+
+.liquid-glass-input input::placeholder,
+.liquid-glass-input .native-input::placeholder {
+  text-align: left !important;
+}
+
+ion-select.liquid-glass-input {
+  --border-radius: 12px !important;
+  --background: rgba(255, 255, 255, 0.05) !important;
+  --border-color: rgba(255, 255, 255, 0.1) !important;
+  --border-style: solid !important;
+  --border-width: 1px !important;
+  --padding-start: 16px !important;
+  --padding-end: 16px !important;
+  --padding-top: 14px !important;
+  --padding-bottom: 14px !important;
+  --color: var(--text) !important;
+  --placeholder-color: var(--text-secondary) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15) !important;
+  height: 50px !important;
+
+  // Odstránenie defaultných štýlov
+  &::part(container) {
+    border-radius: 12px !important;
+  }
+
+  &::part(text) {
+    color: var(--text) !important;
+  }
+
+  &::part(placeholder) {
+    color: var(--text-secondary) !important;
+  }
+}
+
+.liquid-glass-button {
+  width: 100%;
+  flex: 1;
+  --background: rgba(255, 255, 255, 0.1);
+  --color: var(--text);
+  --border-color: rgba(255, 255, 255, 0.2);
+  --border-style: solid;
+  --border-width: 1px;
+  --border-radius: 12px;
+  height: 50px;
+  font-weight: 600;
+}
+
+.liquid-glass-button-blue {
+  width: 100%;
+  flex: 1;
+  --background: rgba(65, 105, 225, 0.2);
+  --color: var(--text);
+  --border-color: rgba(65, 105, 225, 0.4);
+  --border-style: solid;
+  --border-width: 1px;
+  --border-radius: 12px;
+  height: 50px;
+  font-weight: 600;
+}
+
+.liquid-glass-button-blue-dark {
+  width: 100%;
+  flex: 1;
+  --background: rgba(65, 105, 225, 0.4);
+  --color: var(--text);
+  --border-color: rgba(65, 105, 225, 0.6);
+  --border-style: solid;
+  --border-width: 1px;
+  --border-radius: 12px;
+  height: 50px;
+  font-weight: 600;
+}
+
+.liquid-glass-button-red {
+  width: 100%;
+  flex: 1;
+  --background: rgba(220, 53, 69, 0.2) !important;
+  --color: var(--text) !important;
+  --border-color: rgba(220, 53, 69, 0.4) !important;
+  --border-style: solid !important;
+  --border-width: 1px !important;
+  border-radius: 12px !important;
+  height: 50px;
+  font-weight: 600;
+
+  // Fallback with regular CSS properties
+  background: rgba(220, 53, 69, 0.2) !important;
+  border: 1px solid rgba(220, 53, 69, 0.4) !important;
+  border-radius: 12px !important;
+}
+
+.liquid-glass-button-orange {
+  width: 100%;
+  flex: 1;
+  --background: rgba(255, 123, 46, 0.2) !important;
+  --color: var(--text) !important;
+  --border-color: rgba(255, 123, 46, 0.4) !important;
+  --border-style: solid !important;
+  --border-width: 1px !important;
+  border-radius: 12px !important;
+  height: 50px;
+  font-weight: 600;
+
+  // Fallback with regular CSS properties
+  background: rgba(220, 53, 69, 0.2) !important;
+  border: 1px solid rgba(220, 53, 69, 0.4) !important;
+  border-radius: 12px !important;
+}
+
+.liquid-glass-button-green {
+  width: 100%;
+  flex: 1;
+  --background: rgba(40, 167, 69, 0.2) !important;
+  --color: var(--text) !important;
+  --border-color: rgba(40, 167, 69, 0.4) !important;
+  --border-style: solid !important;
+  --border-width: 1px !important;
+  border-radius: 12px !important;
+  height: 50px;
+  font-weight: 600;
+}
+
+.liquid-glass-button-purple {
+  width: 100%;
+  flex: 1;
+  --background: rgba(139, 69, 255, 0.2) !important;
+  --color: var(--text) !important;
+  --border-color: rgba(139, 69, 255, 0.4) !important;
+  --border-style: solid !important;
+  --border-width: 1px !important;
+  border-radius: 12px !important;
+  height: 50px;
+  font-weight: 600;
+}
+
+.liquid-glass-button-yellow {
+  width: 100%;
+  flex: 1;
+  --background: rgba(255, 193, 7, 0.2) !important;
+  --color: var(--text) !important;
+  --border-color: rgba(255, 193, 7, 0.4) !important;
+  --border-style: solid !important;
+  --border-width: 1px !important;
+  border-radius: 12px !important;
+  height: 50px;
+  font-weight: 600;
+}
+
+.liquid-glass-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #87ceeb;
+  background: linear-gradient(135deg,
+      rgba(65, 105, 225, 0.2) 0%,
+      rgba(135, 206, 235, 0.15) 50%,
+      rgba(65, 105, 225, 0.1) 100%);
+  // border: 1px solid rgba(65, 105, 225, 0.4);
+  border-radius: 15px;
+  padding: 4px 12px;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(65, 105, 225, 0.2);
+}
+
+.floating-label {
+  transform: translateY(-50%);
+  position: absolute;
+  left: 50px;
+  top: 0;
+}
+
+.input-emoji {
+  display: inline-block;
+  opacity: 0.7;
+  font-size: 16px;
+  pointer-events: none;
+  color: var(--text-secondary);
+}
+
+// GLOBAL FIX for transparent ion-item in quest sliding
+ion-item-sliding.quest-sliding-item ion-item.transparent-item,
+ion-item-sliding.quest-sliding-item ion-item.transparent-item .item-native,
+ion-item-sliding.quest-sliding-item ion-item.transparent-item .item-inner,
+.quest-sliding-item ion-item.transparent-item,
+.quest-sliding-item ion-item.transparent-item .item-native,
+.quest-sliding-item ion-item.transparent-item .item-inner,
+.transparent-item,
+.transparent-item .item-native,
+.transparent-item .item-inner {
+  background: transparent !important;
+  background-color: transparent !important;
+  --background: transparent !important;
+  --background-activated: transparent !important;
+  --background-focused: transparent !important;
+  --background-hover: transparent !important;
+  --ion-item-background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+// Swiper styles for week calendar
+.swiper-container {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.swiper-wrapper {
+  display: flex;
+}
+
+.swiper-slide {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+// Placeholder week slides
+.placeholder-week {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.04) 50%,
+      rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  margin: 8px;
+}
+
+ion-card {
+  margin: 0;
+  border-radius: 8px;
+
+  ion-card-header,
+  ion-card-content {
+    padding: 0 !important;
+  }
+}
+
+/* Hide scrollbars globally */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Mobile animation optimizations */
+@media (max-width: 768px) {
+
+  .slide-container,
+  .slide-container-delay-0,
+  .slide-container-delay-50,
+  .slide-container-delay-100 {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.18s ease;
+
+    &.slide-in {
+      animation-duration: 0.5s;
+    }
+
+    &.slide-in-reverse {
+      animation-duration: 0.5s;
+    }
+  }
+
+  /* Prevent animation conflicts on mobile */
+  ion-content {
+    overflow-x: hidden;
+  }
+}
+
+// Brutal override for ion-textarea to remove any gray background
+ion-textarea.liquid-glass-input {
+  background: rgba(255, 255, 255, 0.05) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+
+  .textarea-wrapper {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  .native-wrapper {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  .native-textarea {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  &::part(native) {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  &:focus {
+    background: rgba(255, 255, 255, 0.05) !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+
+    .textarea-wrapper,
+    .native-wrapper,
+    .native-textarea {
+      background: transparent !important;
+      background-color: transparent !important;
+    }
+  }
+}
+
+ion-checkbox {
+  --border-radius: 50%;
+  --border-width: 2px;
+  --checkbox-background: transparent;
+  --checkbox-background-checked: #4169E1;
+  --border-color: rgba(65, 105, 225, 0.3);
+  --border-color-checked: #4169E1;
+  --checkmark-color: white;
+}
+
+ion-toggle {
+  --track-background-checked: var(--accent);
+  --handle-background-checked: white;
+  margin-right: 8px;
+}
